@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- code in here to display a list of loans -->
+<!-- loanlist is the variable passed in containing list of loans -->
+<style>
+    th {
+        text-wrap: nowrap;
+    }
+</style>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Loan List</li>
+        </ol>
+    </nav>
+    <h3>Records of loaning books (Total: {{ loanlist|count }})</h3>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Book ID</th>
+                <th scope="col">Book Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Category</th>
+                <th scope="col">Year of Publication</th>
+                <th scope="col">Copy ID</th>
+                <th scope="col">Format</th>
+                <th scope="col">Borrower ID</th>
+                <th scope="col">Borrower Name</th>
+                <th scope="col">Loan Date</th>
+                <th scope="col">Returned</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loanlist %}
+            <tr>
+                <td>{{ loan[7] }}</td>
+                <td>{{ loan[8] }}</td>
+                <td>{{ loan[9] }}</td>
+                <td>{{ loan[10] }}</td>
+                <td>{{ loan[11] }}</td>
+                <td>{{ loan[4] }}</td>
+                <td>{{ loan[12] }}</td>
+                <td>{{ loan[0] }}</td>
+                <td>{{ loan[1] +' ' + loan[2] }}</td>
+                <td>{{ loan[5] }}</td>
+                <td>{% if loan[6] %} Yes {% else %} No {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

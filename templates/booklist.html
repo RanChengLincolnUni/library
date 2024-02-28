@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    th {
+        text-wrap: nowrap;
+    }
+</style>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Book List</li>
+        </ol>
+    </nav>
+    <h3>A list of all books in our collection (Total: {{ booklist|count }})</h3>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Book ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Type</th>
+                <th scope="col">Year of Publication</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in booklist %}
+            <tr>
+                {% for entry in book %}
+                <td>{{entry}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

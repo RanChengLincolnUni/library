@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- code in here to display a list of borrowers -->
+<!-- borrowerlist is the variable passed in containing list of loans -->
+<style>
+    th {
+        text-wrap: nowrap;
+    }
+</style>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Borrower List</li>
+        </ol>
+    </nav>
+    <h3>A list of all the Borrower (Total: {{ borrowerlist|count }})</h3>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Borrower ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Family Name</th>
+                <th scope="col">Birthday</th>
+                <th scope="col">House</th>
+                <th scope="col">Street</th>
+                <th scope="col">Town</th>
+                <th scope="col">City</th>
+                <th scope="col">Zip</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrower in borrowerlist %}
+            <tr>
+                {% for field in borrower %}
+                <td>{{ field }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

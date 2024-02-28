@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- borrowers is the variable passed in listing borrowers -->
+<!-- books is the variable passed in listing available books -->
+<!-- loandate is the variable passed in containing the current date -->
+<!-- name for the borrower dropdown borrower should be  borrower -->
+<!-- name for the book dropdown should be book-->
+<!-- name for the hidden field with date should be loandate -->
+<!-- URL for submission (action) of form should be loan/add -->
+<style>
+    .form-container {
+        border: 1px solid lightgray;
+        border-radius: 1em;
+        margin-top: 1em;
+        padding: 1em;
+    }
+
+    button[type=submit] {
+        padding: 0.5em 2em;
+    }
+</style>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Loan</li>
+        </ol>
+    </nav>
+    <h3>Loan a book copy</h3>
+
+    <div class="form-container">
+        <form action="{{ url_for('addloan') }}" method="post">
+            <div class="mb-3 row">
+                <label for="loandate" class="col-sm-2 col-form-label">Date</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="loandate" name="loandate"
+                        value="{{ loandate }}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="borrower" class="col-sm-2 col-form-label">Borrower</label>
+                <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example" id="borrower" name="borrower"
+                        required>
+                        <option selected disabled="" value="">Select borrower</option>
+                        {% for borrower in borrowers %}
+                        <option value="{{ borrower[0] }}">{{ borrower[1] }} {{ borrower[2] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="book" class="col-sm-2 col-form-label">Book</label>
+                <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example" id="book" name="book" required>
+                        <option selected disabled="" value="">Select book</option>
+                        {% for book in books %}
+                        <option value="{{ book[0] }}">{{ book[4] }} ({{ book[2] }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <button class="btn btn-primary" type="submit">Loan</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
